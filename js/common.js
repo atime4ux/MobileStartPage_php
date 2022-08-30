@@ -17,6 +17,22 @@ function GetPostData() {
     return postData;
 }
 
+function GetPostDataBody() {
+    var postData = {};
+
+    $(':input')
+        .not("#__EVENTTARGET, #__EVENTARGUMENT, #__LASTFOCUS, #__VIEWSTATE")
+        .each(function (index) {
+            if ($(this).val() != null) {
+                if ($(this).val().length > 0) {
+                    postData[$(this).attr('id')] = $(this).val();
+                }
+            }
+        });
+
+    return postData;
+}
+
 function CallAjax(target_url, postData, success_obj, fail_obj) {
     $.ajax({
         type: "GET",
@@ -25,7 +41,35 @@ function CallAjax(target_url, postData, success_obj, fail_obj) {
         url: target_url,
         data: postData,
         success: function (data) {
+            // console.dir(data);
+            if (success_obj != null && success_obj != undefined) {
+                success_obj.Run(data);
+            }
+            else {
+                return data;
+            }
+        },
+        error: function (data) {
             console.dir(data);
+            if (fail_obj != null && fail_obj != undefined) {
+                fail_obj.Run(data);
+            }
+            else {
+                return data;
+            }
+        }
+    });
+}
+
+function CallAjaxPost(target_url, postData, success_obj, fail_obj) {
+    $.ajax({
+        type: "POST",
+        cache: false,
+        async: true,
+        url: target_url,
+        data: postData,
+        success: function (data) {
+            // console.dir(data);
             if (success_obj != null && success_obj != undefined) {
                 success_obj.Run(data);
             }
@@ -48,7 +92,7 @@ function CallAjax(target_url, postData, success_obj, fail_obj) {
 var Ajax_Fail = {
     Run: function (result) {
         if (result == undefined || result == null || result == '') {
-            alert('½ÇÆÐÇß½À´Ï´Ù');
+            alert('ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤.');
         }
         else {
             alert(result);
