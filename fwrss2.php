@@ -50,6 +50,8 @@
                 $channel->link .= "?fwrss=1";
     
                 $channel->children('itunes', true)->subtitle .= "(fwrss)";
+                $channel->children('itunes', true)->keywords .= "(fwrss)";
+                //$channel->children('itunes', true)->image->attributes()->href = ((string)$channel->children('itunes', true)->image->attributes()->href) . "?(fwrss)";
     
                 $itemCnt = count($channel->item);
                 $itemLimit = 100;
@@ -59,6 +61,11 @@
                     {
                         unset($channel->item[$itemLimit]);
                     }
+                }
+
+                for($i=0; $i<count($channel->item); $i++)
+                {
+                    $channel->item[$i]->title .= "(fwrss)";
                 }
                 
                 echo $xml->asXML();
