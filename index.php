@@ -308,10 +308,10 @@
 <body>
     <div id="divMain">
         <div id="divNewTab">
-            <span id="newTab">새탭 생성</span>
+            <span id="spanDateNow"></span><br>
+            <span id="spanDateTarget"></span>
         </div>
         <div id="divSearch">
-            <input id="txtSearchWord" type="text" style="width:90px" />
         </div>
         <!--북마크섹션 시작-->
         <input id="hdfCatIdx" type="hidden" />

@@ -3,18 +3,6 @@ $(document).ready(function () {
 });
 
 function InitControl() {
-    $("#txtSearchWord").keydown(function (key) {
-        if (key.keyCode == 13) {
-            var search_word = $("#txtSearchWord").val();
-            $("#txtSearchWord").val('');
-            SearchGoogle(search_word);
-        }
-    });
-
-    $('#newTab').click(function () {
-        NewTab();
-    });
-
     $('.subCategory .title').click(function (evt) {
         const $elem = $(evt.currentTarget)
         ToggleDisplayProp($elem.data('categoryIdx'))
@@ -42,6 +30,16 @@ function InitControl() {
     })
 
     $("#hdfCatIdx").val($(".subCategory:first").find('.title').data('categoryIdx'));
+
+    var dateNow = new Date();
+    var targetDate = new Date(new Date().setDate(dateNow.getDate()+60));
+    var ymdFormat = (date)=>{
+        var arrDayName = ['일', '월', '화', '수', '목', '금', '토'];
+        return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} (${arrDayName[date.getDay()]})`;
+    };
+
+    $("#spanDateNow").text(ymdFormat(dateNow));
+    $("#spanDateTarget").text(ymdFormat(targetDate));
 }
 
 function BindCategoryDdl(lstCategory){
@@ -167,9 +165,6 @@ function MovePage(mobileUrl, desktopUrl) {
         document.location.href = desktopUrl;
     }
 }
-function NewTab() {
-    window.open('about:blank');
-}
 function ShowEditSiteArea() {
     $("#divEditSite").css('display', 'block');
 }
@@ -230,12 +225,6 @@ function SaveSiteInfo() {
         }
     }
         , Ajax_Fail);
-}
-function SearchGoogle(search_word) {
-    var url = "http://www.google.co.kr/cse";
-    var param = "?q=" + encodeURIComponent(search_word);
-
-    window.open(url + param);
 }
 var AddSite_Success = {
     Run: function (data) {
