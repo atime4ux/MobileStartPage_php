@@ -32,7 +32,7 @@ function InitControl() {
     $("#hdfCatIdx").val($(".subCategory:first").find('.title').data('categoryIdx'));
 
     var dateNow = new Date();
-    var targetDate = new Date(new Date().setDate(dateNow.getDate()+60));
+    var targetDate = new Date(new Date().setDate(dateNow.getDate()+30));
     var ymdFormat = (date)=>{
         var arrDayName = ['일', '월', '화', '수', '목', '금', '토'];
         return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} (${arrDayName[date.getDay()]})`;

@@ -302,8 +302,8 @@
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <!-- <script src="/js/jquery-1.6.4.js"></script> -->
-    <script src="/js/common.js"></script>
-    <script src="/js/mobileStartPage.js"></script>
+    <script src="/js/common.js?v=230914_001"></script>
+    <script src="/js/mobileStartPage.js?v=230914_001"></script>
 </head>
 <body>
     <div id="divMain">
